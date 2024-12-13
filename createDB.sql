@@ -4,7 +4,7 @@ create database btl;
 use btl;
 
 -- khởi tạo bảng book
-create table book (
+create table Books (
 	book_ID int not null primary key, 
     bookName varchar(50) not null, 
     bookCost float,
@@ -19,13 +19,13 @@ create table Orderdetails (
     book_ID int not null,
     productNumber int,
     primary key(Order_ID),
-    foreign key (book_ID) references book(book_ID)
+    foreign key (book_ID) references Books(book_ID)
 );
 
 
 
 -- khởi tạo bảng offices
-create table offices (
+create table Offices (
 	officeCode int not null,
     officeName varchar(50), 
     address varchar(20), 
@@ -33,19 +33,19 @@ create table offices (
 );
 
 -- khởi tạo bảng employees
-create table employees (
+create table Employees (
 	employee_ID int not null, 
     officeCode int not null, 
     empName varchar(50) not null, 
     phoneNumber varchar(10) not null, 
     E_role varchar(50) not null, 
     primary key(employee_ID), 
-    foreign key( officeCode) references offices(officeCode)
+    foreign key( officeCode) references Offices(officeCode)
 );
 
 
 -- khởi tạo bảng customers
-create table customers( 
+create table Customers(
 	customer_ID int not null, 
     employeeSale int not null,
     customerName varchar(50) not null, 
@@ -53,12 +53,12 @@ create table customers(
     address varchar(10),
     balance float not null,
     primary key(customer_ID),
-    foreign key(employeeSale) references employees(employee_ID)
+    foreign key(employeeSale) references Employees(employee_ID)
 );
 
 
 -- khởi tạo bảng orders
-create table orders (
+create table Orders (
 	order_ID int not null,
     orderName varchar(50) not null,
     customer_ID int not null, 
@@ -67,15 +67,15 @@ create table orders (
 	orderDate date not null, 
     shippedDate date not null,
     foreign key(order_ID) references orderdetails(order_ID),
-    foreign key(customer_ID) references customers(customer_ID)
+    foreign key(customer_ID) references Customers(customer_ID)
 );
 
 -- khởi tạo bảng payments
-create table payments(
+create table Payments(
 	customer_ID int not null,
     amount float not null,
     paymentDate date,
-    foreign key(customer_ID) references customers(customer_ID)
+    foreign key(customer_ID) references Customers(customer_ID)
 );
 
 INSERT INTO offices (officeCode, officeName, address) VALUES
@@ -90,8 +90,8 @@ INSERT INTO offices (officeCode, officeName, address) VALUES
 (9, 'Uptown Office', '864 Spruce St'),
 (10, 'Suburban Office', '753 Willow Way');
 
--- Thêm dữ liệu vào bảng employees
-INSERT INTO employees (employee_ID, officeCode, empName, phoneNumber, E_role) VALUES
+-- Thêm dữ liệu vào bảng Employees
+INSERT INTO Employees (employee_ID, officeCode, empName, phoneNumber, E_role) VALUES
 (101, 1, 'Nguyen Van A', '0901234567', 'Manager'),
 (102, 1, 'Tran Thi B', '0909876543', 'Sales'),
 (103, 2, 'Le Van C', '0912345678', 'Staff'),
@@ -103,8 +103,8 @@ INSERT INTO employees (employee_ID, officeCode, empName, phoneNumber, E_role) VA
 (109, 8, 'Nguyen Van I', '0978901234', 'Manager'),
 (110, 9, 'Pham Thi J', '0989012345', 'Sales');
 
--- Thêm dữ liệu vào bảng customers
-INSERT INTO customers (customer_ID, employeeSale, customerName, phoneNumber, address, balance) VALUES
+-- Thêm dữ liệu vào bảng Customers
+INSERT INTO Customers (customer_ID, employeeSale, customerName, phoneNumber, address, balance) VALUES
 (201, 102, 'Pham Hong D', '0933333333', '1A', 100.0),
 (202, 103, 'Hoang Minh E', '0944444444', '2B', 200.0),
 (203, 104, 'Nguyen Thi F', '0955555555', '3C', 150.0),
@@ -117,7 +117,7 @@ INSERT INTO customers (customer_ID, employeeSale, customerName, phoneNumber, add
 (210, 101, 'Tran Van Q', '0933333334', '10J', 70.0);
 
 -- Thêm dữ liệu vào bảng book
-INSERT INTO book (book_ID, bookName, bookCost, genre, author, inventory) VALUES
+INSERT INTO Books (book_ID, bookName, bookCost, genre, author, inventory) VALUES
 (301, 'Book A', 50.0, 'Fiction', 'Author 1', 20),
 (302, 'Book B', 60.0, 'Science', 'Author 2', 15),
 (303, 'Book C', 70.0, 'History', 'Author 3', 10),
@@ -142,8 +142,8 @@ INSERT INTO Orderdetails (order_ID, book_ID, productNumber) VALUES
 (409, 309, 2),
 (410, 310, 4);
 
--- Thêm dữ liệu vào bảng orders
-INSERT INTO orders (order_ID, orderName, customer_ID, detail, orderCost, orderDate, shippedDate) VALUES
+-- Thêm dữ liệu vào bảng Orders
+INSERT INTO Orders (order_ID, orderName, customer_ID, detail, orderCost, orderDate, shippedDate) VALUES
 (401, 'Order 1', 201, '2 copies of Book A', 100, '2023-12-01', '2023-12-03'),
 (402, 'Order 2', 202, '1 copy of Book B', 60, '2023-12-02', '2023-12-04'),
 (403, 'Order 3', 203, '3 copies of Book C', 210, '2023-12-03', '2023-12-05'),
@@ -155,8 +155,8 @@ INSERT INTO orders (order_ID, orderName, customer_ID, detail, orderCost, orderDa
 (409, 'Order 9', 209, '2 copies of Book I', 160, '2023-12-09', '2023-12-11'),
 (410, 'Order 10', 210, '4 copies of Book J', 220, '2023-12-10', '2023-12-12');
 
--- Thêm dữ liệu vào bảng payments
-INSERT INTO payments (customer_ID, amount, paymentDate) VALUES
+-- Thêm dữ liệu vào bảng Payments
+INSERT INTO Payments (customer_ID, amount, paymentDate) VALUES
 (201, 100.0, '2023-12-05'),
 (202, 60.0, '2023-12-06'),
 (203, 210.0, '2023-12-07'),
@@ -169,7 +169,7 @@ INSERT INTO payments (customer_ID, amount, paymentDate) VALUES
 (210, 220.0, '2023-12-14');
 
 
-select *from payments
+
 
 
 
