@@ -3,7 +3,7 @@ create database btl;
 
 use btl;
 
--- khởi tạo bảng book
+-- khởi tạo bảng books
 create table Books (
 	book_ID int not null primary key, 
     bookName varchar(50) not null, 
