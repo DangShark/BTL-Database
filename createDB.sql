@@ -116,7 +116,7 @@ INSERT INTO Customers (customer_ID, employeeSale, customerName, phoneNumber, add
 (209, 110, 'Le Thi P', '0922222222', '9I', 500.0),
 (210, 101, 'Tran Van Q', '0933333334', '10J', 70.0);
 
--- Thêm dữ liệu vào bảng book
+-- Thêm dữ liệu vào bảng books
 INSERT INTO Books (book_ID, bookName, bookCost, genre, author, inventory) VALUES
 (301, 'Book A', 50.0, 'Fiction', 'Author 1', 20),
 (302, 'Book B', 60.0, 'Science', 'Author 2', 15),
